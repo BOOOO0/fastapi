@@ -4,8 +4,8 @@
 
 ## memo app
 
-- [메모 앱](https://wordle-1-h4056952.deta.app/wordle/)
+- [메모 앱](https://memos-1-w0452371.deta.app/)
 
 ## wordle
 
-- [wordle](https://memos-1-w0452371.deta.app/)
+- [wordle](https://wordle-1-h4056952.deta.app/wordle/)
