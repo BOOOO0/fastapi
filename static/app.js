@@ -5,12 +5,29 @@ const createMemo = async (value) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id: new Date(),
+      id: new Date().getTime(),
       content: value,
     }),
   });
   const jsonRes = await res.json();
-  console.log(jsonRes);
+  let idd = await res.body.content;
+  console.log(idd);
+  readMemo();
+};
+
+const readMemo = async () => {
+  const res = await fetch("/memos");
+  const jsonRes = await res.json();
+  const ul = document.querySelector("#memo-ul");
+  ul.innerHTML = "";
+  jsonRes.forEach(displayMemo);
+};
+
+const displayMemo = (memo) => {
+  const ul = document.querySelector("#memo-ul");
+  const li = document.createElement("li");
+  li.innerHTML = `[id:${memo.id}] ${memo.content}`;
+  ul.appendChild(li);
 };
 
 const handleSubmit = (event) => {
@@ -19,6 +36,8 @@ const handleSubmit = (event) => {
   createMemo(input.value);
   input.value = "";
 };
+
+readMemo();
 
 const form = document.querySelector("#memo-form");
 
