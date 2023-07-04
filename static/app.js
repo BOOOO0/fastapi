@@ -27,7 +27,44 @@ const displayMemo = (memo) => {
   const ul = document.querySelector("#memo-ul");
   const li = document.createElement("li");
   li.innerHTML = `[id:${memo.id}] ${memo.content}`;
+
+  const editBtn = document.createElement("button");
+  editBtn.innerHTML = "수정하기";
+  editBtn.addEventListener("click", editMemo);
+  editBtn.dataset.id = memo.id;
+
+  const delBtn = document.createElement("button");
+  delBtn.innerHTML = "삭제";
+  delBtn.addEventListener("click", deleteMemo);
+  delBtn.dataset.id = memo.id;
+
+  li.appendChild(editBtn);
+  li.appendChild(delBtn);
   ul.appendChild(li);
+};
+
+const editMemo = async (event) => {
+  const id = event.target.dataset.id;
+  const editInput = prompt("내용을 수정해주세요.");
+  const res = await fetch(`/memo/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: id,
+      content: editInput,
+    }),
+  });
+  readMemo();
+};
+
+const deleteMemo = async (event) => {
+  const id = event.target.dataset.id;
+  const res = await fetch(`/memos/${id}`, {
+    method: "DELETE",
+  });
+  readMemo();
 };
 
 const handleSubmit = (event) => {
