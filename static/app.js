@@ -26,7 +26,7 @@ const readMemo = async () => {
 const displayMemo = (memo) => {
   const ul = document.querySelector("#memo-ul");
   const li = document.createElement("li");
-  li.innerHTML = `[id:${memo.id}] ${memo.content}`;
+  li.innerHTML = `${memo.content}`;
 
   const editBtn = document.createElement("button");
   editBtn.innerHTML = "수정하기";
